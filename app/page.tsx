@@ -88,9 +88,9 @@ export default function Home() {
   }
 
   return (
-    <div className="bg-[conic-gradient(at_bottom_left,_var(--tw-gradient-stops))] from-slate-950 via-violet-950 to-slate-900 w-full h-screen">
+    <div className="bg-[conic-gradient(at_bottom_left,_var(--tw-gradient-stops))] from-slate-950 via-violet-950 to-slate-900 w-full h-screen max-h-screen">
         <div className="flex flex-col w-full h-full">
-            <div className="grid grid-cols-8 grid-rows-4 w-full h-full">
+            <div className="grid grid-cols-8 grid-rows-5 w-full h-full">
               <div className="row-span-1 col-span-8 border-white/50 w-full h-full flex flex-col">
                 <div className="border-b-2 border-white/50 py-2 px-4 flex items-center justify-between">
                   <p className="font-mono">Treasure Hunt</p>
@@ -98,7 +98,7 @@ export default function Home() {
                 </div>
                 <HeaderTitle text={"BINUS BLOCKCHAIN AND CRYPTO CLUB"} speed={40} />
               </div>
-              <div className="row-span-2 col-span-1 bg-transparent border border-white/50 w-full h-full"></div>
+              <div className="row-span-2 col-span-1 bg-transparent border border-white/50 w-full h-full flex flex-col"></div>
               <div className="row-span-1 col-span-1 bg-transparent border border-white/50 w-full h-full flex flex-col">
                 <div className="flex flex-col items-center justify-center w-full h-full">
                   <p className="text-transparent text-stroke text-9xl z-0 font-bold opacity-50">B</p>
@@ -145,7 +145,7 @@ export default function Home() {
                   <p className="text-transparent text-stroke text-7xl absolute z-0 top-10 left-1/2 -translate-x-1/2 font-bold opacity-50 uppercase">{chest.name}</p>
                 </div>
               </div>
-              <div className="row-span-2 col-span-1 bg-transparent border border-white/50 w-full h-full"></div>
+              <div className="row-span-2 col-span-1 bg-transparent border border-white/50 w-full h-full flex flex-col"></div>
               <div className="row-span-1 col-span-1 bg-transparent border border-white/50 w-full h-full flex flex-col">
                 <div className="flex flex-col items-center justify-center w-full h-full">
                   <p className="text-transparent text-stroke text-9xl z-0 font-bold opacity-50">C</p>
@@ -156,7 +156,7 @@ export default function Home() {
                   <p className="text-transparent text-stroke text-9xl z-0 font-bold opacity-50">C</p>
                 </div>
               </div>
-              <div className="row-span-2 col-span-1 bg-transparent border border-white/50 w-full h-full">
+              <div className="row-span-2 col-span-1 bg-transparent border border-white/50 w-full h-full flex flex-col">
                 <AnimatedQuarterCircle />
               </div>
               <div className="row-span-2 col-span-2 bg-transparent border border-white/50 w-full h-full flex flex-col">
@@ -184,9 +184,9 @@ export default function Home() {
                   {/* <VirtualPet /> */}
                 </div>
               </div>
-              <div className="row-span-1 col-span-1 bg-transparent border border-white/50 w-full h-full">
+              <div className="row-span-1 col-span-1 bg-transparent border border-white/50 w-full h-full flex flex-col">
               </div>
-              <div className="row-span-1 col-span-2 bg-transparent border border-white/50 w-full h-full">
+              <div className="row-span-1 col-span-2 bg-transparent border border-white/50 w-full h-full flex flex-col">
               </div>
               <div className="row-span-1 col-span-3 bg-transparent border border-white/50 w-full h-full flex flex-col">
                 <div className="p-4 flex flex-col w-full h-full relative overflow-hidden">

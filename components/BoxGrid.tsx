@@ -71,7 +71,7 @@ const BoxGrid: React.FC<BoxGridProps> = ({ grid, width, gutter }) => {
   }, [startPosition]);
 
   useEffect(() => {
-    tl.seek
+    tl.seek(0)
   })
 
   return <div ref={containerRef} className=""></div>;
