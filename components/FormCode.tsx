@@ -8,7 +8,6 @@ type Props = {
 }
 
 export default function FormCode({onCodeCheck, passCode}: Props) {
-    // const secretCodes = ["2039", "2309"];
     const inputFieldsRef = useRef<any>(null);
     const [enteredCode, setEnteredCode] = useState("");
 

@@ -41,7 +41,7 @@ const InputFields = forwardRef(({ containerClassName, inputClassName, onInputCha
           key={index}
           type="text"
           maxLength={1}
-          ref={(el) => (inputRefs.current[index] = el)}
+          ref={(el) => {if (el) inputRefs.current[index] = el}}
           className={cn("bg-transparent text-white text-center font-mono", inputClassName)}
           value={code[index]} 
           onChange={(e) => handleInput(e, index)}
