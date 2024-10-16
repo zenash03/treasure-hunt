@@ -10,7 +10,7 @@ interface BoxGridProps {
 
 const BoxGrid: React.FC<BoxGridProps> = ({ grid, width, gutter }) => {
   const position = ["end", "start"];
-  const [startPosition, setStartPosition] = useState<number>(0);
+  // const [startPosition, setStartPosition] = useState<number>(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const [tl] = useState(() => gsap.timeline({ repeat: -1, repeatDelay: 0.1 }));
 
@@ -66,9 +66,9 @@ const BoxGrid: React.FC<BoxGridProps> = ({ grid, width, gutter }) => {
   useEffect(() => {
     tl.seek(0).clear()
     buildGrid();
-    animateBoxes(position[startPosition], null, "none"); 
-    setStartPosition((prevPosition) => (prevPosition === 0 ? 1 : 0));
-  }, [startPosition]);
+    animateBoxes("end", null, "none"); 
+    // setStartPosition(0);
+  });
 
   useEffect(() => {
     tl.seek(0)
