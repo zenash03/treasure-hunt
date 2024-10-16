@@ -1,101 +1,200 @@
+"use client";
+import VirtualPet from "@/components/VirtualPet";
+import BoxGrid from "@/components/BoxGrid";
+import { treasureHunt } from "@/lib/dummyData";
 import Image from "next/image";
+import HeaderTitle from "@/components/HeaderTitle";
+import FormCode from "@/components/FormCode";
+import { useRef, useState } from "react";
+import { gsap } from "gsap";
+import AnimatedQuarterCircle from "@/components/AnimatedQuarterCircle";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const chest = treasureHunt[0];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const [chestImage, setChestImage] = useState("/assets/chest.svg");
+  const [alertMessage, setAlertMessage] = useState<string | null>("Enter The Code");
+  const alertRef = useRef<HTMLDivElement>(null);
+  const chestRef = useRef<HTMLImageElement>(null);
+
+  const handleFormResult = (isCodeCorrect: boolean) => {
+    if (isCodeCorrect) {
+      setAlertMessage("Code is Correct");
+      animateSuccess();
+    } else {
+      setAlertMessage("Incorrect code, please try again!");
+      animateError();
+    }
+  };
+
+  const animateSuccess = () => {
+    if (alertRef.current) {
+      gsap.fromTo(
+        alertRef.current,
+        { scale: 0.5, opacity: 0, backgroundColor: "#4CAF50" },
+        {
+          scale: 1,
+          opacity: 1,
+          duration: 0.5,
+          ease: "elastic.out(1, 0.3)",
+          onStart: () => {animateOpenChest()}
+          // onComplete: () => gsap.to(alertRef.current, { opacity: 0, delay: 2 }),
+        }
+      );
+    }
+  };
+
+  const animateError = () => {
+    if (alertRef.current) {
+      gsap.fromTo(
+        alertRef.current,
+        { x: -10, backgroundColor: "#F44336" },
+        {
+          x: 10,
+          duration: 0.1,
+          yoyo: true,
+          repeat: 5,
+          ease: "power1.inOut",
+          onStart: () => {
+            setChestImage("/assets/chest.svg")
+          },
+          onComplete: () => {
+            gsap.to(alertRef.current, {x: 0})
+          },
+          // onComplete: () => gsap.to(alertRef.current, { opacity: 0, delay: 2 }),
+        }
+      );
+    }
+  }
+  const animateOpenChest = () => {
+    gsap.fromTo(
+      chestRef.current,
+      { scale: 0.5, rotate: 0 },
+      {
+        scale: 1.3,
+        rotate: 5,
+        yoyo: true,
+        repeat: 1,
+        duration: 0.7,
+        ease: "elastic.out(1, 0.5)",
+        onStart: () => {
+          setChestImage("/assets/chest-open.svg")
+        },
+        onComplete: () => {
+          gsap.to(chestRef.current, {scale: 1, rotate: 0, duration: 0.3, ease: "back.out(2)"})
+        }
+      }
+    )
+  }
+
+  return (
+    <div className="bg-[conic-gradient(at_bottom_left,_var(--tw-gradient-stops))] from-slate-950 via-violet-950 to-slate-900 w-full h-screen">
+        <div className="flex flex-col w-full h-full">
+            <div className="grid grid-cols-8 grid-rows-4 w-full h-full">
+              <div className="row-span-1 col-span-8 border-white/50 w-full h-full flex flex-col">
+                <div className="border-b-2 border-white/50 py-2 px-4 flex items-center justify-between">
+                  <p className="font-mono">Treasure Hunt</p>
+                  <Image src={"/assets/BBCC.jpg"} alt="" width={1} height={1} className="w-6 h-6 rounded-sm" />
+                </div>
+                <HeaderTitle text={"BINUS BLOCKCHAIN AND CRYPTO CLUB"} speed={40} />
+              </div>
+              <div className="row-span-2 col-span-1 bg-transparent border border-white/50 w-full h-full"></div>
+              <div className="row-span-1 col-span-1 bg-transparent border border-white/50 w-full h-full flex flex-col">
+                <div className="flex flex-col items-center justify-center w-full h-full">
+                  <p className="text-transparent text-stroke text-9xl z-0 font-bold opacity-50">B</p>
+                </div>
+              </div>
+              <div className="row-span-1 col-span-1 bg-transparent border border-white/50 w-full h-full flex flex-col">
+                <div className="flex flex-col items-center justify-center w-full h-full">
+                  <p className="text-transparent text-stroke text-9xl z-0 font-bold opacity-50">B</p>
+                </div>
+              </div>
+              <div className="row-span-3 col-span-2 bg-transparent border border-white/50 w-full h-full flex flex-col">
+                <div className="w-full border-b-2 border-white/50 py-2 px-3">
+                  <p className="font-mono">Treasure Hunt</p>
+                </div>
+                <div className="py-4 px-4 mt-3 flex flex-col items-start gap-5 w-full h-full">
+                { (alertMessage) ? (
+                  <div
+                    ref={alertRef}
+                    className="border rounded-md h-full w-full p-4 text-white flex items-center justify-center"
+                  >
+                    <p className="text-4xl text-center font-mono tracking-widest">
+                      {alertMessage}
+                    </p>
+                  </div>
+                  ) : 
+                  (
+                    <div
+                      ref={alertRef}
+                      className="border rounded-md h-full w-full p-4 text-white"
+                    >
+                      {alertMessage}
+                    </div>
+                  )
+                }
+                  <div className="h-full">
+                    <p className="font-mono mb-2 text-lg">Enter Crudential Code</p>
+                    <FormCode onCodeCheck={handleFormResult} passCode={chest.passCode} />
+                  </div>
+                </div>
+              </div>
+              <div className="row-span-2 col-span-2 bg-transparent border border-white/50 w-full h-full flex flex-col">
+                <div className="w-full h-full p-4 flex flex-col justify-center items-center relative">
+                  <Image src={chestImage} alt="" width={1} height={1} className="w-64 z-10" ref={chestRef} />
+                  <p className="text-transparent text-stroke text-7xl absolute z-0 top-10 left-1/2 -translate-x-1/2 font-bold opacity-50 uppercase">{chest.name}</p>
+                </div>
+              </div>
+              <div className="row-span-2 col-span-1 bg-transparent border border-white/50 w-full h-full"></div>
+              <div className="row-span-1 col-span-1 bg-transparent border border-white/50 w-full h-full flex flex-col">
+                <div className="flex flex-col items-center justify-center w-full h-full">
+                  <p className="text-transparent text-stroke text-9xl z-0 font-bold opacity-50">C</p>
+                </div>
+              </div>
+              <div className="row-span-1 col-span-1 bg-transparent border border-white/50 w-full h-full flex flex-col">
+                <div className="flex flex-col items-center justify-center w-full h-full">
+                  <p className="text-transparent text-stroke text-9xl z-0 font-bold opacity-50">C</p>
+                </div>
+              </div>
+              <div className="row-span-2 col-span-1 bg-transparent border border-white/50 w-full h-full">
+                <AnimatedQuarterCircle />
+              </div>
+              <div className="row-span-2 col-span-2 bg-transparent border border-white/50 w-full h-full flex flex-col">
+                {/* <div className="w-full h-full flex flex-col p-8">
+                  <div className="w-28 h-28 grid grid-cols-2 grid-rows-2 gap-2">
+                    <div className="w-full h-full bg-transparent border-2 border-white/50 rounded-xl" />
+                    <div className="w-full h-full bg-transparent border-2 border-white/50 rounded-xl" />
+                    <div className="w-full h-full bg-transparent border-2 border-white/50 rounded-xl" />
+                    <div className="w-full h-full bg-transparent border-2 border-white/50 rounded-xl" />
+                  </div>
+                </div> */}
+              </div>
+              <div className="row-span-1 col-span-2 bg-transparent border border-white/50 w-full h-full flex flex-col">
+                <div className="relative overflow-hidden w-full h-full flex flex-col items-start justify-start">
+                  <div className="grid grid-cols-6 justify-end w-full h-full">
+                    <div className="w-full h-full col-span-2" />
+                    <div className="w-full h-full border border-white/60 rounded-l-full" />
+                    <div className="w-full h-full border border-white/60 rounded-l-full" />
+                    <div className="w-full h-full border border-white/60 rounded-r-full" />
+                    <div className="w-full h-full border border-white/60 rounded-r-full" />
+                  </div>
+                  <div className="w-full border-t-2 border-white/50 py-2 px-3">
+                    <p className="font-mono text-right">Find The Code.</p>
+                  </div>
+                  {/* <VirtualPet /> */}
+                </div>
+              </div>
+              <div className="row-span-1 col-span-1 bg-transparent border border-white/50 w-full h-full">
+              </div>
+              <div className="row-span-1 col-span-2 bg-transparent border border-white/50 w-full h-full">
+              </div>
+              <div className="row-span-1 col-span-3 bg-transparent border border-white/50 w-full h-full flex flex-col">
+                <div className="p-4 flex flex-col w-full h-full relative overflow-hidden">
+                  <BoxGrid grid={[3, 13]} width={10} gutter={15} />
+                </div>
+              </div>
+            </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
