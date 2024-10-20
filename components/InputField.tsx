@@ -39,7 +39,7 @@ const InputFields = forwardRef(({ containerClassName, inputClassName, onInputCha
       {Array.from({ length: 4 }, (_, index) => (
         <Input
           key={index}
-          type="text"
+          type="password"
           maxLength={1}
           ref={(el) => {if (el) inputRefs.current[index] = el}}
           className={cn("bg-transparent text-white text-center font-mono", inputClassName)}

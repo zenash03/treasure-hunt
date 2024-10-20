@@ -2,7 +2,7 @@
 const treasureHunt = [
     {
         name: "chest",
-        passCode: "2039",
+        passCode: "2801",
     },
 ]
 

@@ -18,9 +18,13 @@ export default function FormCode({onCodeCheck, passCode}: Props) {
         onCodeCheck(isCodeCorrect); 
 
         if (!isCodeCorrect) {
-            inputFieldsRef.current.clearForm();
+            clearForm();
         }
     };
+
+    const clearForm = () => {
+        inputFieldsRef.current.clearForm();
+    }
 
     const handleInputChange = (value: string) => {
         setEnteredCode(value);
@@ -33,9 +37,10 @@ export default function FormCode({onCodeCheck, passCode}: Props) {
                 onInputChange={handleInputChange}
                 ref={inputFieldsRef}
             />
+            <button type="button" onClick={clearForm} className="text-base float-end rounded-lg p-1.5 bg-transparent text-white font-bold tracking-wide">Clear Form</button>
             <button
                 type="submit"
-                className="w-full h-16 mt-6 rounded-lg bg-transparent text-white border-2 border-white/60 font-bold hover:bg-slate-900 hover:text-white"
+                className="w-full h-16 mt-2 rounded-lg bg-transparent text-white border-2 border-white/60 font-bold hover:bg-slate-900 hover:text-white"
             >
                 Try Code
             </button>

@@ -71,7 +71,7 @@ export default function Home() {
       chestRef.current,
       { scale: 0.5, rotate: 0 },
       {
-        scale: 1.3,
+        scale: 1.4,
         rotate: 5,
         yoyo: true,
         repeat: 1,
@@ -88,13 +88,13 @@ export default function Home() {
   }
 
   return (
-    <div className="bg-[conic-gradient(at_bottom_left,_var(--tw-gradient-stops))] from-slate-950 via-violet-950 to-slate-900 w-full h-screen max-h-screen">
+    <div className="bg-[conic-gradient(at_bottom_left,_var(--tw-gradient-stops))] from-[#130933] via-[#14073f] to-[#0f013f] w-full h-screen max-h-screen">
         <div className="flex flex-col w-full h-full">
             <div className="grid grid-cols-8 grid-rows-5 w-full h-full">
               <div className="row-span-1 col-span-8 border-white/50 w-full h-full flex flex-col">
                 <div className="border-b-2 border-white/50 py-2 px-4 flex items-center justify-between">
                   <p className="font-mono">Treasure Hunt</p>
-                  <Image src={"/assets/BBCC.jpg"} alt="" width={1} height={1} className="w-6 h-6 rounded-sm" />
+                  <Image src={"/assets/BBCC-Logo-2.png"} alt="" width={300} height={300} className="w-12 h-full object-contain rounded-sm" />
                 </div>
                 <HeaderTitle text={"BINUS BLOCKCHAIN AND CRYPTO CLUB"} speed={40} />
               </div>
@@ -113,13 +113,13 @@ export default function Home() {
                 <div className="w-full border-b-2 border-white/50 py-2 px-3">
                   <p className="font-mono">Treasure Hunt</p>
                 </div>
-                <div className="py-4 px-4 mt-3 flex flex-col items-start gap-5 w-full h-full">
+                <div className="py-4 px-4 flex flex-col items-start justify-start gap-5 w-full h-full">
                 { (alertMessage) ? (
                   <div
                     ref={alertRef}
                     className="border rounded-md h-full w-full p-4 text-white flex items-center justify-center"
                   >
-                    <p className="text-4xl text-center font-mono tracking-widest">
+                    <p className="text-2xl text-center font-mono tracking-widest">
                       {alertMessage}
                     </p>
                   </div>
@@ -157,7 +157,8 @@ export default function Home() {
                 </div>
               </div>
               <div className="row-span-2 col-span-1 bg-transparent border border-white/50 w-full h-full flex flex-col">
-                <AnimatedQuarterCircle />
+                <AnimatedQuarterCircle repeatDelay={4} />
+                <AnimatedQuarterCircle repeatDelay={6} />
               </div>
               <div className="row-span-2 col-span-2 bg-transparent border border-white/50 w-full h-full flex flex-col">
                 {/* <div className="w-full h-full flex flex-col p-8">

@@ -2,7 +2,7 @@
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 
-export default function AnimatedQuarterCircle() {
+export default function AnimatedQuarterCircle({repeatDelay}: {repeatDelay: number}) {
   const blockRefs = useRef<HTMLDivElement[]>([]);
   const boxRef = useRef<HTMLDivElement>(null);
 
@@ -27,7 +27,7 @@ export default function AnimatedQuarterCircle() {
         gsap.fromTo(
           boxRef.current, 
           { rotate: 0 },
-          { delay: 2, rotate: 90, duration: 1.5, repeatDelay: 4, repeat: -1, ease: "power2.out"}
+          { delay: 2, rotate: 90, duration: 1.5, repeatDelay: repeatDelay, repeat: -1, ease: "power2.out"}
         )
       }
     });
